@@ -419,7 +419,7 @@ header { flex-shrink:0; height:54px; padding:0 20px; border-bottom:1px solid var
 </div>
 
 <script>
-const API ='https://placeai-backend-v9up.onrender.com/api';                       //'http://localhost:4000/api';
+const API ='https://placeai-backend-v9up.onrender.com/api';                       
 let token = localStorage.getItem('pt_token');
 let currentUser = JSON.parse(localStorage.getItem('pt_user') || 'null');
 let currentMode = 'GD', currentSessionId = null, conversationHistory = [], isLoading = false;
@@ -651,7 +651,7 @@ async function sendMessage() {
   const systemPrompt=`You are an AI Soft Skills Trainer designed to help students prepare for placements.\nMODE: ${currentMode}\nTOPIC: ${topic}\nGENERAL RULES:\n- Keep responses realistic and human-like\n- Concise (2-3 lines per response unless needed)\n- Professional and supportive tone\n${currentMode==='GD'?`Simulate group discussion with:\n1. Rahul – aggressive, confident\n2. John – logical, structured\n3. Aiko – calm, balanced\nFORMAT:\nRahul: ...\nJohn: ...\nAiko: ...`:''}\n${currentMode==='DEBATE'?`Take opposing stance, ask counter-questions, provide strong arguments.\nFORMAT: AI: ...`:''}\n${currentMode==='INTERVIEW'?`Act as HR interviewer. Ask question OR evaluate answer.\nGive: Score (X/10), Strengths, Improvements, Better Answer.\nFORMAT:\nQuestion: ...\nEvaluation: ...\nScore: X/10\nStrengths: ...\nImprovements: ...\nBetter Answer: ...`:''}\n${currentMode==='COMMUNICATION'?`Communication coach. Correct grammar, suggest better phrasing.\nFORMAT:\nResponse: ...\nCorrection: ...\nSuggestion: ...`:''}\n${currentMode==='SITUATIONAL'?`Give workplace scenario, evaluate response, suggest best approach.\nFORMAT:\nScenario: ...\nEvaluation: ...\nBest Approach: ...`:''}`;
 
   try {
-    const response=await fetch('http://localhost:4000/api/chat',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:systemPrompt,messages:conversationHistory})});
+    const response=await fetch('http://https://placeai-backend-v9up.onrender.com/api/chat',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:systemPrompt,messages:conversationHistory})});
     const data=await response.json();
     const aiText=data.content?.map(b=>b.text||'').join('')||'Sorry, could not generate a response.';
     conversationHistory.push({role:'assistant',content:aiText});
