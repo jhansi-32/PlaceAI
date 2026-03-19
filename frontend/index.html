@@ -363,7 +363,7 @@ header{flex-shrink:0;padding:14px 24px;border-bottom:1px solid var(--border);dis
 
 <script>
 // ─── CONFIG ───
-const API = 'https://placeai-backend-v9up.onrender.com/api';
+const API = 'http://localhost:4000/api';
 
 // ─── STATE ───
 let token = localStorage.getItem('pt_token');
@@ -783,9 +783,9 @@ Evaluation: ...
 Best Approach: ...` : ''}`;
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://placeai-backend-v9up.onrender.com/api/chat', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
