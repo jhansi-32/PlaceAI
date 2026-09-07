@@ -219,4 +219,447 @@ header{flex-shrink:0;height:54px;padding:0 20px;border-bottom:1px solid var(--bo
 .s1::after{background:var(--blue)}.s2::after{background:var(--purple)}.s3::after{background:var(--green)}.s4::after{background:var(--amber)}
 .stat-val{font-size:2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:3px;font-family:var(--mono)}
 .s1 .stat-val{color:var(--blue)}.s2 .stat-val{color:var(--purple)}.s3 .stat-val{color:var(--green)}.s4 .stat-val{color:var(--amber)}
-.stat-lbl{font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppe
+.stat-lbl{font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3)}
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:18px;margin-bottom:16px}
+.chart-card:last-child{margin-bottom:0}
+.chart-ttl{font-size:.7rem;font-weight:700;color:var(--text2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+.bar-chart{display:flex;flex-direction:column;gap:10px}
+.bar-item{display:flex;align-items:center;gap:10px}
+.bar-name{font-size:.65rem;color:var(--text2);width:96px;flex-shrink:0;font-weight:600}
+.bar-track{flex:1;background:var(--bg2);border-radius:100px;height:6px;overflow:hidden}
+.bar-fill{height:100%;border-radius:100px;transition:width .9s cubic-bezier(.22,1,.36,1)}
+.bar-val{font-family:var(--mono);font-weight:700;font-size:.68rem;min-width:24px;text-align:right}
+.score-chart{display:flex;align-items:flex-end;gap:5px;height:80px}
+.score-bar-wrap{flex:1;height:100%;display:flex;align-items:flex-end}
+.score-bar-fill{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(to top,var(--blue),rgba(59,130,246,0.3));transition:height .8s cubic-bezier(.22,1,.36,1);min-height:4px;position:relative;cursor:pointer}
+.score-bar-fill:hover::after{content:attr(data-score);position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.58rem;background:var(--surface3);padding:2px 6px;border-radius:4px;white-space:nowrap;font-family:var(--mono);color:var(--text);border:1px solid var(--border2)}
+.no-data{font-size:.72rem;color:var(--text3);text-align:center;padding:18px}
+.avg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:9px}
+.avg-card{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:13px;text-align:center;transition:all .18s}
+.avg-card:hover{border-color:var(--green)}
+.avg-val{font-family:var(--mono);font-weight:800;font-size:1.3rem;color:var(--green)}
+.avg-name{font-size:.6rem;font-weight:700;color:var(--text3);margin-top:3px;letter-spacing:.06em;text-transform:uppercase}
+.rs-tbl{width:100%;border-collapse:collapse}
+.rs-tbl th{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);text-align:left;padding:0 12px 10px;border-bottom:1px solid var(--border)}
+.rs-tbl td{font-size:.72rem;padding:10px 12px;border-bottom:1px solid rgba(30,45,69,.5);color:var(--text2)}
+.rs-tbl tr:last-child td{border-bottom:none}
+.rs-tbl tr:hover td{background:rgba(59,130,246,0.03)}
+.mode-tag{display:inline-block;padding:2px 8px;border-radius:5px;font-weight:700;font-size:.6rem;letter-spacing:.04em}
+.mode-tag.GD{background:var(--green-dim);color:var(--green)}.mode-tag.INTERVIEW{background:var(--blue-dim);color:var(--blue)}.mode-tag.DEBATE{background:var(--red-dim);color:var(--red)}.mode-tag.COMMUNICATION{background:var(--amber-dim);color:var(--amber)}.mode-tag.SITUATIONAL{background:var(--purple-dim);color:var(--purple)}
+.toast{position:fixed;bottom:22px;right:22px;background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:11px 16px;font-size:.73rem;font-weight:600;color:var(--text);z-index:999;animation:fadeUp .3s ease;box-shadow:0 8px 28px rgba(0,0,0,.4);display:flex;align-items:center;gap:7px}
+.toast::before{width:6px;height:6px;border-radius:50%;content:'';flex-shrink:0}
+.toast.success{border-color:rgba(16,185,129,0.3)}.toast.success::before{background:var(--green)}
+.toast.error{border-color:rgba(239,68,68,0.3)}.toast.error::before{background:var(--red)}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="authScreen">
+  <div class="auth-wrap">
+    <div class="auth-left">
+      <div>
+        <div class="auth-brand"><div class="auth-brand-icon">🎯</div><div class="auth-brand-name">Place<span>AI</span></div></div>
+        <h2>Ace Your<br/><span>Placement Rounds</span></h2>
+        <p>AI-powered practice platform for GD, debates, interviews & communication skills.</p>
+        <div class="auth-features">
+          <div class="auth-feat"><div class="af-dot"></div>Live Group Discussion with 3 AI personas</div>
+          <div class="auth-feat"><div class="af-dot"></div>HR Interview rounds with scoring & feedback</div>
+          <div class="auth-feat"><div class="af-dot"></div>Voice practice — speak & get transcribed</div>
+          <div class="auth-feat"><div class="af-dot"></div>Track progress with detailed analytics</div>
+        </div>
+      </div>
+      <div class="auth-footer">PlaceAI · Your placement preparation partner</div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-title">Welcome back</div>
+      <div class="auth-sub">Sign in to continue your practice</div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+        <button class="auth-tab" onclick="switchAuthTab('register')">Create Account</button>
+      </div>
+      <div class="auth-error" id="authError"></div>
+      <div id="loginForm">
+        <div class="field"><label>Email Address</label><input type="email" id="loginEmail" placeholder="you@example.com"/></div>
+        <div class="field"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+        <button class="auth-btn" onclick="doLogin()">Sign In →</button>
+      </div>
+      <div id="registerForm" style="display:none">
+        <div class="field"><label>Full Name</label><input type="text" id="regName" placeholder="Your Name"/></div>
+        <div class="field"><label>Email Address</label><input type="email" id="regEmail" placeholder="you@example.com"/></div>
+        <div class="field"><label>Password</label><input type="password" id="regPassword" placeholder="Minimum 6 characters"/></div>
+        <button class="auth-btn" onclick="doRegister()">Create Account →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="mainHeader" style="display:none">
+  <div class="brand"><div class="brand-icon">🎯</div><div class="brand-name">Place<span>AI</span></div></div>
+  <div class="hdr-div"></div>
+  <nav class="nav-pills">
+    <button class="nav-pill active" onclick="showPage('chat')">💬 Practice</button>
+    <button class="nav-pill" onclick="showPage('sessions')">📋 History</button>
+    <button class="nav-pill" onclick="showPage('analytics')">📊 Analytics</button>
+  </nav>
+  <div class="hdr-right">
+    <div class="live-badge"><div class="live-dot"></div>LIVE</div>
+    <div class="user-chip"><div class="user-av" id="userAvatar">?</div><span class="user-nm" id="userName">...</span></div>
+    <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+  </div>
+</header>
+
+<!-- APP -->
+<div id="appScreen" style="display:none">
+
+  <!-- CHAT -->
+  <div class="page active" id="chatPage">
+    <aside class="sidebar">
+      <div class="sb-sec">
+        <div class="sec-lbl">Practice Mode</div>
+        <div class="mode-grid">
+          <button class="mode-btn active" onclick="setMode('GD',this)"><span class="mi">🗣️</span>Group<br>Discussion</button>
+          <button class="mode-btn" onclick="setMode('DEBATE',this)"><span class="mi">⚔️</span>Debate</button>
+          <button class="mode-btn" onclick="setMode('INTERVIEW',this)"><span class="mi">💼</span>Interview</button>
+          <button class="mode-btn" onclick="setMode('COMMUNICATION',this)"><span class="mi">💬</span>Comms</button>
+          <button class="mode-btn span2" onclick="setMode('SITUATIONAL',this)"><span class="mi">🏢</span>Situational</button>
+        </div>
+      </div>
+      <div class="sb-sec">
+        <div class="sec-lbl">Topic</div>
+        <input class="topic-input" id="topicInput" value="AI in Education" placeholder="Enter a topic..."/>
+        <div class="chips">
+          <span class="chip" onclick="setTopic('AI in Education')">AI & Education</span>
+          <span class="chip" onclick="setTopic('Remote Work')">Remote Work</span>
+          <span class="chip" onclick="setTopic('Climate Change')">Climate</span>
+          <span class="chip" onclick="setTopic('Social Media Impact')">Social Media</span>
+          <span class="chip" onclick="setTopic('Startup vs Corporate')">Startups</span>
+          <span class="chip" onclick="setTopic('Work-Life Balance')">Work-Life</span>
+        </div>
+        <div class="mode-desc" id="modeInfo"><strong>🗣️ Group Discussion</strong>Practice with 3 AI personas — Rahul (bold), John (logical), Aiko (calm).</div>
+      </div>
+      <div class="sb-sec">
+        <div class="sec-lbl">Recent Sessions</div>
+        <div class="session-list" id="sidebarSessions"><div class="no-sess">No sessions yet</div></div>
+      </div>
+    </aside>
+
+    <div class="chat-area">
+      <div class="chat-topbar">
+        <div class="ct-pulse"></div>
+        <span class="ct-mode" id="chatHeaderMode">Group Discussion</span>
+        <span class="ct-sep">·</span>
+        <span class="ct-topic" id="chatHeaderTopic">Topic: AI in Education</span>
+        <div class="ct-actions">
+          <button class="ct-btn" onclick="saveAndNewSession()">＋ New Session</button>
+          <button class="ct-btn red" onclick="clearChat()">↺ Clear</button>
+        </div>
+      </div>
+      <div class="messages" id="messages">
+        <div class="welcome" id="welcomeEl">
+          <div class="w-title">Practice.<br/><span>Get Placed.</span></div>
+          <div class="w-sub">Your AI coach for GD, Debate, Interview, Communication & Situational rounds.</div>
+          <div class="w-cards">
+            <div class="w-card"><span class="wc-ic">🗣️</span><div class="wc-t">Group Discussion</div><div class="wc-d">3 AI personas simulate a live GD round</div></div>
+            <div class="w-card"><span class="wc-ic">💼</span><div class="wc-t">HR Interview</div><div class="wc-d">Scored rounds with feedback & model answers</div></div>
+            <div class="w-card"><span class="wc-ic">🎤</span><div class="wc-t">Voice Practice</div><div class="wc-d">Speak your answer — mic transcribes instantly</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="voice-bar" id="voiceBar">
+        <div class="vwave"><span></span><span></span><span></span><span></span><span></span></div>
+        <span id="voiceStatus">Listening… speak now</span>
+        <button class="vstop" onclick="stopRecording()">■ Stop</button>
+      </div>
+      <div class="input-bar">
+        <div class="input-wrap">
+          <textarea id="userInput" placeholder="Type your message or click 🎤 to speak…" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        </div>
+        <button class="ib-btn" onclick="clearChat()" title="Clear">↺</button>
+        <button class="mic-btn" id="micBtn" onclick="toggleRecording()">🎤</button>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESSIONS -->
+  <div class="page" id="sessionsPage" style="flex-direction:column">
+    <div class="full-page">
+      <div class="pg-hdr"><div class="pg-title">Session History</div><button class="refresh-btn" onclick="loadSessions()">↺ Refresh</button></div>
+      <div class="sessions-grid" id="sessionsGrid"><div class="empty-state"><div class="empty-ic">💬</div><p>No sessions yet.<br>Start practicing to see your history here.</p></div></div>
+    </div>
+  </div>
+
+  <!-- ANALYTICS -->
+  <div class="page" id="analyticsPage" style="flex-direction:column">
+    <div class="full-page">
+      <div class="pg-hdr"><div class="pg-title">Analytics Dashboard</div><button class="refresh-btn" onclick="loadAnalytics()">↺ Refresh</button></div>
+      <div class="stats-row">
+        <div class="stat-card s1"><div class="stat-val" id="statSessions">—</div><div class="stat-lbl">Total Sessions</div></div>
+        <div class="stat-card s2"><div class="stat-val" id="statMessages">—</div><div class="stat-lbl">Messages Sent</div></div>
+        <div class="stat-card s3"><div class="stat-val" id="statAvgScore">—</div><div class="stat-lbl">Avg Interview Score</div></div>
+        <div class="stat-card s4"><div class="stat-val" id="statDays">—</div><div class="stat-lbl">Active Days</div></div>
+      </div>
+      <div class="charts-row">
+        <div class="chart-card" style="margin-bottom:0"><div class="chart-ttl">Sessions by Mode</div><div class="bar-chart" id="modeChart"><div class="no-data">No data yet</div></div></div>
+        <div class="chart-card" style="margin-bottom:0"><div class="chart-ttl">Interview Score Trend</div><div class="score-chart" id="scoreChart" style="align-items:flex-end;padding:0 4px"><div class="no-data" style="align-self:center">No scores yet</div></div></div>
+      </div>
+      <div class="chart-card"><div class="chart-ttl">Average Score per Mode</div><div class="avg-grid" id="avgModeGrid"><div class="no-data">No score data yet</div></div></div>
+      <div class="chart-card"><div class="chart-ttl">Recent Sessions</div>
+        <table class="rs-tbl"><thead><tr><th>Mode</th><th>Topic</th><th>Messages</th><th>Avg Score</th><th>Date</th></tr></thead><tbody id="rsBody"><tr><td colspan="5" class="no-data">No sessions yet</td></tr></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'https://placeai-backend-48f7.onrender.com/api';
+let token = localStorage.getItem('pt_token');
+let currentUser = JSON.parse(localStorage.getItem('pt_user') || 'null');
+let currentMode = 'GD', currentSessionId = null, conversationHistory = [], isLoading = false;
+
+const modeInfo = {
+  GD: { label:'Group Discussion', icon:'🗣️', desc:'Practice with 3 AI personas — Rahul (bold), John (logical), Aiko (calm). Share your views and get a realistic GD experience.' },
+  DEBATE: { label:'Debate', icon:'⚔️', desc:'The AI takes an opposing stance, pushes back with counter-questions, and challenges your reasoning.' },
+  INTERVIEW: { label:'Interview', icon:'💼', desc:'Face HR-style questions, get scored out of 10, and receive actionable improvement tips.' },
+  COMMUNICATION: { label:'Communication Coach', icon:'💬', desc:'Real-time grammar corrections, better phrasing suggestions, and clarity coaching.' },
+  SITUATIONAL: { label:'Situational', icon:'🏢', desc:'Tackle realistic workplace scenarios — conflicts, leadership, time management.' }
+};
+const modeColors = { GD:'#10b981', DEBATE:'#ef4444', INTERVIEW:'#3b82f6', COMMUNICATION:'#f59e0b', SITUATIONAL:'#8b5cf6' };
+
+window.onload = () => { if (token && currentUser) initApp(); };
+
+function initApp() {
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('mainHeader').style.display = 'flex';
+  document.getElementById('appScreen').style.display = 'flex';
+  document.getElementById('userAvatar').textContent = currentUser.name[0].toUpperCase();
+  document.getElementById('userName').textContent = currentUser.name.split(' ')[0];
+  loadSidebarSessions();
+}
+
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((b,i) => b.classList.toggle('active',(tab==='login'&&i===0)||(tab==='register'&&i===1)));
+  document.getElementById('loginForm').style.display = tab==='login'?'block':'none';
+  document.getElementById('registerForm').style.display = tab==='register'?'block':'none';
+  document.getElementById('authError').style.display = 'none';
+}
+function showAuthError(msg) { const el = document.getElementById('authError'); el.textContent = msg; el.style.display = 'block'; }
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim(), password = document.getElementById('loginPassword').value;
+  if (!email || !password) return showAuthError('Please fill in all fields');
+  try { const res = await apiFetch('/auth/login','POST',{email,password},false); token=res.token; currentUser=res.user; localStorage.setItem('pt_token',token); localStorage.setItem('pt_user',JSON.stringify(currentUser)); initApp(); }
+  catch(e) { showAuthError(e.message||'Login failed'); }
+}
+async function doRegister() {
+  const name=document.getElementById('regName').value.trim(), email=document.getElementById('regEmail').value.trim(), password=document.getElementById('regPassword').value;
+  if (!name||!email||!password) return showAuthError('Please fill in all fields');
+  if (password.length<6) return showAuthError('Password must be at least 6 characters');
+  try { const res = await apiFetch('/auth/register','POST',{name,email,password},false); token=res.token; currentUser=res.user; localStorage.setItem('pt_token',token); localStorage.setItem('pt_user',JSON.stringify(currentUser)); initApp(); }
+  catch(e) { showAuthError(e.message||'Registration failed'); }
+}
+function doLogout() { token=null; currentUser=null; localStorage.removeItem('pt_token'); localStorage.removeItem('pt_user'); location.reload(); }
+
+async function apiFetch(path,method='GET',body=null,auth=true) {
+  const headers={'Content-Type':'application/json'};
+  if (auth&&token) headers['Authorization']='Bearer '+token;
+  const res = await fetch(API+path,{method,headers,body:body?JSON.stringify(body):null});
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error||'Request failed');
+  return data;
+}
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-pill').forEach(t=>t.classList.remove('active'));
+  document.getElementById(page+'Page').classList.add('active');
+  document.querySelectorAll('.nav-pill')[['chat','sessions','analytics'].indexOf(page)].classList.add('active');
+  if (page==='analytics') loadAnalytics();
+  if (page==='sessions') loadSessions();
+}
+
+function setMode(mode,btn) {
+  currentMode=mode;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const info=modeInfo[mode];
+  document.getElementById('chatHeaderMode').textContent=info.label;
+  document.getElementById('modeInfo').innerHTML=`<strong>${info.icon} ${info.label}</strong>${info.desc}`;
+  endCurrentSession(); clearChat();
+}
+function setTopic(topic) { document.getElementById('topicInput').value=topic; document.getElementById('chatHeaderTopic').textContent='Topic: '+topic; }
+document.getElementById('topicInput').addEventListener('input',function(){document.getElementById('chatHeaderTopic').textContent='Topic: '+(this.value||'General');});
+
+async function startSession() { if(currentSessionId)return; const topic=document.getElementById('topicInput').value||'General'; try{const res=await apiFetch('/sessions','POST',{mode:currentMode,topic});currentSessionId=res.sessionId;}catch(e){} }
+async function endCurrentSession() { if(!currentSessionId)return; try{await apiFetch('/sessions/'+currentSessionId+'/end','PATCH');}catch(e){} currentSessionId=null; }
+async function saveMessage(role,content,score=null) { if(!currentSessionId)return; try{await apiFetch('/sessions/'+currentSessionId+'/messages','POST',{role,content,score,mode:currentMode});}catch(e){} }
+async function saveAndNewSession() { await endCurrentSession(); clearChat(); showToast('Session saved ✓','success'); loadSidebarSessions(); }
+
+async function loadSidebarSessions() {
+  try {
+    const res=await apiFetch('/sessions');
+    const el=document.getElementById('sidebarSessions');
+    if(!res.sessions.length){el.innerHTML='<div class="no-sess">No sessions yet</div>';return;}
+    el.innerHTML=res.sessions.slice(0,5).map(s=>`<div class="session-item" onclick="loadSessionChat(${s.id})"><div class="si-top"><span class="si-mode">${s.mode}</span><span class="si-topic">${s.topic}</span></div><div class="si-date">${fmtDate(s.started_at)}</div></div>`).join('');
+  }catch(e){}
+}
+
+async function loadSessionChat(id) {
+  try {
+    const res=await apiFetch('/sessions/'+id);
+    endCurrentSession(); currentSessionId=res.session.id; currentMode=res.session.mode;
+    clearChat(false); conversationHistory=[];
+    res.messages.forEach(m=>{conversationHistory.push({role:m.role==='assistant'?'assistant':'user',content:m.content});appendMessage(m.role==='user'?'user':'ai',m.content);});
+    document.getElementById('topicInput').value=res.session.topic;
+    document.getElementById('chatHeaderMode').textContent=modeInfo[currentMode]?.label||currentMode;
+    document.getElementById('chatHeaderTopic').textContent='Topic: '+res.session.topic;
+    showPage('chat'); showToast('Session loaded ✓','success');
+  }catch(e){showToast('Failed to load session','error');}
+}
+
+async function loadSessions() {
+  try {
+    const res=await apiFetch('/sessions');
+    const grid=document.getElementById('sessionsGrid');
+    if(!res.sessions.length){grid.innerHTML='<div class="empty-state"><div class="empty-ic">💬</div><p>No sessions yet.<br>Start practicing to see your history here.</p></div>';return;}
+    grid.innerHTML=res.sessions.map(s=>`<div class="session-card" onclick="loadSessionChat(${s.id})"><button class="sc-del" onclick="event.stopPropagation();deleteSession(${s.id},this)">✕</button><div class="sc-hdr"><span class="mode-tag ${s.mode}">${s.mode}</span><span class="sc-topic">${s.topic}</span></div><div class="sc-stats"><div class="sc-stat">Messages: <b>${s.msg_count}</b></div>${s.avg_score?`<div class="sc-stat">Score: <b>${s.avg_score.toFixed(1)}/10</b></div>`:''}</div><div class="sc-date">${fmtDate(s.started_at)}</div></div>`).join('');
+  }catch(e){showToast('Failed to load sessions','error');}
+}
+
+async function deleteSession(id,btn) { try{await apiFetch('/sessions/'+id,'DELETE');btn.closest('.session-card').remove();showToast('Deleted','success');loadSidebarSessions();}catch(e){showToast('Delete failed','error');} }
+
+async function loadAnalytics() {
+  try {
+    const d=await apiFetch('/analytics/dashboard');
+    document.getElementById('statSessions').textContent=d.totalSessions;
+    document.getElementById('statMessages').textContent=d.totalMessages;
+    document.getElementById('statDays').textContent=d.activeDays;
+    const intScore=d.avgScores.find(s=>s.mode==='INTERVIEW');
+    document.getElementById('statAvgScore').textContent=intScore?intScore.avg+'/10':'—';
+    const total=d.modeCounts.reduce((a,m)=>a+m.count,0)||1;
+    const mChart=document.getElementById('modeChart');
+    mChart.innerHTML=d.modeCounts.length?d.modeCounts.map(m=>`<div class="bar-item"><div class="bar-name">${m.mode}</div><div class="bar-track"><div class="bar-fill" style="width:${(m.count/total*100).toFixed(1)}%;background:${modeColors[m.mode]||'#3b82f6'}"></div></div><div class="bar-val" style="color:${modeColors[m.mode]||'#3b82f6'}">${m.count}</div></div>`).join(''):'<div class="no-data">No data yet</div>';
+    const sChart=document.getElementById('scoreChart');
+    if(d.scoreTrend.length){const max=Math.max(...d.scoreTrend.map(s=>s.score),1);sChart.innerHTML=d.scoreTrend.map(s=>`<div class="score-bar-wrap"><div class="score-bar-fill" data-score="${s.score}/10" style="height:${(s.score/max*100)}%"></div></div>`).join('');}
+    else sChart.innerHTML='<div class="no-data" style="align-self:center">No scores yet</div>';
+    const avgGrid=document.getElementById('avgModeGrid');
+    avgGrid.innerHTML=d.avgScores.length?d.avgScores.map(m=>`<div class="avg-card"><div class="avg-val">${m.avg}/10</div><div class="avg-name">${m.mode}</div><div style="font-size:.58rem;color:var(--text3);margin-top:2px">${m.attempts} attempt${m.attempts>1?'s':''}</div></div>`).join(''):'<div class="no-data">No score data yet</div>';
+    const tbody=document.getElementById('rsBody');
+    tbody.innerHTML=d.recentSessions.length?d.recentSessions.map(s=>`<tr><td><span class="mode-tag ${s.mode}">${s.mode}</span></td><td>${s.topic}</td><td>${s.msg_count}</td><td>${s.avg_score?s.avg_score.toFixed(1)+'/10':'—'}</td><td>${fmtDate(s.started_at)}</td></tr>`).join(''):'<tr><td colspan="5" class="no-data">No sessions yet</td></tr>';
+  }catch(e){showToast('Analytics load failed','error');}
+}
+
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,110)+'px';}
+
+function clearChat(resetSession=true) {
+  if(resetSession){endCurrentSession();conversationHistory=[];}
+  const msgs=document.getElementById('messages'); msgs.innerHTML='';
+  const w=document.createElement('div'); w.className='welcome'; w.id='welcomeEl';
+  w.innerHTML=`<div class="w-title">Practice.<br/><span>Get Placed.</span></div><div class="w-sub">Select a mode and topic, then start typing or speak to begin.</div><div class="w-cards"><div class="w-card"><span class="wc-ic">🗣️</span><div class="wc-t">Group Discussion</div><div class="wc-d">3 AI personas simulate a live GD round</div></div><div class="w-card"><span class="wc-ic">💼</span><div class="wc-t">HR Interview</div><div class="wc-d">Scored rounds with feedback & model answers</div></div><div class="w-card"><span class="wc-ic">🎤</span><div class="wc-t">Voice Practice</div><div class="wc-d">Speak your answer — mic transcribes instantly</div></div></div>`;
+  msgs.appendChild(w);
+}
+
+function appendMessage(role,content) {
+  const w=document.getElementById('welcomeEl'); if(w)w.remove();
+  const msgs=document.getElementById('messages');
+  const div=document.createElement('div'); div.className='msg '+role;
+  const meta=document.createElement('div'); meta.className='msg-meta';
+  const sender=document.createElement('span'); sender.className='msg-sender'; sender.textContent=role==='user'?'You':currentMode+' AI';
+  const time=document.createElement('span'); time.className='msg-time'; time.textContent=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  meta.appendChild(sender); meta.appendChild(time);
+  const bub=document.createElement('div'); bub.className='msg-bubble';
+  if(role==='ai'){
+    bub.innerHTML=formatAI(content);
+    const lb=document.createElement('button'); lb.className='tts-btn'; lb.textContent='🔊 Listen';
+    lb.onclick=function(){speakText(content,this,currentMode==='GD');};
+    bub.appendChild(lb);
+  } else { bub.innerHTML=escHtml(content); }
+  div.appendChild(meta); div.appendChild(bub);
+  msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+}
+
+function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function formatAI(text) {
+  let t=escHtml(text);
+  if(currentMode==='GD'){t=t.replace(/^(Rahul|John|Aiko):/gm,(m,n)=>`<span class="gd-name ${n.toLowerCase()}">${m}</span>`);t=t.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');return t;}
+  if(currentMode==='INTERVIEW'){t=t.replace(/(Question:|Evaluation:|Improvements?:|Strengths?:|Better (Sample )?Answer:)/g,'<span class="section-tag">$1</span>');t=t.replace(/Score:\s*(\d+(?:\/10)?)/g,'<span class="section-tag">Score:</span><span class="score-badge">$1</span>');}
+  if(currentMode==='COMMUNICATION')t=t.replace(/(Response:|Correction:|Suggestion:)/g,'<span class="section-tag">$1</span>');
+  if(currentMode==='SITUATIONAL')t=t.replace(/(Scenario:|Evaluation:|Best Approach:)/g,'<span class="section-tag">$1</span>');
+  if(currentMode==='DEBATE')t=t.replace(/^AI:/gm,'<span class="section-tag">AI:</span>');
+  return t.replace(/\n/g,'<br>');
+}
+
+function extractScore(text){const m=text.match(/Score:\s*(\d+)/i);return m?parseInt(m[1]):null;}
+
+function showTyping() {
+  const w=document.getElementById('welcomeEl'); if(w)w.remove();
+  const msgs=document.getElementById('messages');
+  const div=document.createElement('div'); div.className='msg ai'; div.id='typingEl';
+  const meta=document.createElement('div'); meta.className='msg-meta';
+  const s=document.createElement('span'); s.className='msg-sender'; s.textContent=currentMode+' AI'; meta.appendChild(s);
+  const bub=document.createElement('div'); bub.className='typing';
+  bub.innerHTML='<div class="td"></div><div class="td"></div><div class="td"></div>';
+  div.appendChild(meta); div.appendChild(bub); msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+}
+function removeTyping(){const t=document.getElementById('typingEl');if(t)t.remove();}
+
+// VOICE INPUT
+let recognition=null, isRecording=false;
+function toggleRecording() {
+  if(isRecording){stopRecording();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){showToast('Use Chrome for voice input','error');return;}
+  recognition=new SR(); recognition.continuous=false; recognition.interimResults=true; recognition.lang='en-IN';
+  const micBtn=document.getElementById('micBtn'), vBar=document.getElementById('voiceBar'), input=document.getElementById('userInput');
+  isRecording=true; micBtn.classList.add('recording'); micBtn.textContent='⏹'; vBar.classList.add('active');
+  recognition.onresult=(e)=>{let interim='',final='';for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)final+=e.results[i][0].transcript;else interim+=e.results[i][0].transcript;}input.value=final||interim;autoResize(input);document.getElementById('voiceStatus').textContent=interim?'🎤 '+interim:'Processing…';};
+  recognition.onend=()=>{stopRecording();if(input.value.trim())setTimeout(()=>sendMessage(),300);};
+  recognition.onerror=(e)=>{stopRecording();showToast('Mic error: '+e.error,'error');};
+  recognition.start();
+}
+function stopRecording(){isRecording=false;document.getElementById('micBtn').classList.remove('recording');document.getElementById('micBtn').textContent='🎤';document.getElementById('voiceBar').classList.remove('active');document.getElementById('voiceStatus').textContent='Listening… speak now';if(recognition){try{recognition.stop();}catch(e){}recognition=null;}}
+
+// VOICE OUTPUT
+let currentUtterance=null;
+const personaVoices={Rahul:{pitch:0.5,rate:1.25,gender:'male'},John:{pitch:0.95,rate:0.82,gender:'male'},Aiko:{pitch:1.7,rate:0.9,gender:'female'}};
+function getVoiceForPersona(persona){const voices=window.speechSynthesis.getVoices();const profile=personaVoices[persona];if(!profile)return voices.find(v=>v.lang.startsWith('en'))||voices[0];if(profile.gender==='female')return voices.find(v=>v.lang.startsWith('en')&&(v.name.includes('Zira')||v.name.includes('Samantha')||v.name.includes('Google UK English Female')||v.name.includes('Karen')))||voices.find(v=>v.lang.startsWith('en'))||voices[0];return voices.find(v=>v.lang.startsWith('en')&&(v.name.includes('David')||v.name.includes('Google UK English Male')||v.name.includes('Daniel')))||voices.find(v=>v.lang.startsWith('en'))||voices[0];}
+function speakGDMessage(text,btnEl){if(!window.speechSynthesis)return;if(currentUtterance){window.speechSynthesis.cancel();currentUtterance=null;document.querySelectorAll('.tts-btn').forEach(b=>{b.classList.remove('speaking');b.textContent='🔊 Listen';});if(btnEl.dataset.speaking==='true'){btnEl.dataset.speaking='false';return;}}const clean=text.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();const parts=clean.split(/(Rahul:|John:|Aiko:)/);const segments=[];let persona=null;for(let i=0;i<parts.length;i++){const p=parts[i].trim();if(p==='Rahul:'||p==='John:'||p==='Aiko:'){persona=p.replace(':','');}else if(p&&persona){segments.push({persona,text:p});persona=null;}else if(p){segments.push({persona:null,text:p});}}if(!segments.length){speakText(clean,btnEl);return;}btnEl.classList.add('speaking');btnEl.textContent='⏹ Stop';btnEl.dataset.speaking='true';let idx=0;function speakNext(){if(idx>=segments.length||btnEl.dataset.speaking==='false'){btnEl.classList.remove('speaking');btnEl.textContent='🔊 Listen';btnEl.dataset.speaking='false';currentUtterance=null;return;}const seg=segments[idx++];const utt=new SpeechSynthesisUtterance(seg.text);const profile=personaVoices[seg.persona]||{pitch:1,rate:0.95};utt.pitch=profile.pitch;utt.rate=profile.rate;utt.lang='en-US';const voice=getVoiceForPersona(seg.persona);if(voice)utt.voice=voice;utt.onend=speakNext;currentUtterance=utt;window.speechSynthesis.speak(utt);}speakNext();}
+function speakText(text,btnEl,isGD){if(!window.speechSynthesis)return;if(isGD){speakGDMessage(text,btnEl);return;}if(currentUtterance){window.speechSynthesis.cancel();currentUtterance=null;document.querySelectorAll('.tts-btn').forEach(b=>{b.classList.remove('speaking');b.textContent='🔊 Listen';});if(btnEl.dataset.speaking==='true'){btnEl.dataset.speaking='false';return;}}const clean=text.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();const utterance=new SpeechSynthesisUtterance(clean);utterance.lang='en-US';utterance.rate=0.95;utterance.pitch=1;const voices=window.speechSynthesis.getVoices();const preferred=voices.find(v=>v.lang.startsWith('en')&&v.name.includes('Google'))||voices.find(v=>v.lang.startsWith('en'))||voices[0];if(preferred)utterance.voice=preferred;btnEl.classList.add('speaking');btnEl.textContent='⏹ Stop';btnEl.dataset.speaking='true';currentUtterance=utterance;utterance.onend=()=>{btnEl.classList.remove('speaking');btnEl.textContent='🔊 Listen';btnEl.dataset.speaking='false';currentUtterance=null;};window.speechSynthesis.speak(utterance);}
+
+async function sendMessage() {
+  if(isLoading)return;
+  const input=document.getElementById('userInput');
+  const message=input.value.trim();
+  if(!message)return;
+  if(!token){showToast('Session expired. Please login again.','error');doLogout();return;}
+  const topic=document.getElementById('topicInput').value||'General';
+  input.value=''; input.style.height='auto';
+  if(!currentSessionId)await startSession();
+  appendMessage('user',message); await saveMessage('user',message);
+  conversationHistory.push({role:'user',content:message});
+  isLoading=true; document.getElementById('sendBtn').disabled=true; showTyping();
+
+  const systemPrompt=`You are an AI Soft Skills Trainer designed to help students prepare for placements.\nMODE: ${currentMode}\nTOPIC: ${topic}\nGENERAL RULES:\n- Keep responses realistic and human-like\n- Concise (2-3 lines per response unless needed)\n- Professional and supportive tone\n${currentMode==='GD'?`Simulate group discussion with:\n1. Rahul – aggressive, confident\n2. John – logical, structured\n3. Aiko – calm, balanced\nFORMAT:\nRahul: ...\nJohn: ...\nAiko: ...`:''}\n${currentMode==='DEBATE'?`Take opposing stance, ask counter-questions, provide strong arguments.\nFORMAT: AI: ...`:''}\n${currentMode==='INTERVIEW'?`Act as HR interviewer. Ask question OR evaluate answer.\nGive: Score (X/10), Strengths, Improvements, Better Answer.\nFORMAT:\nQuestion: ...\nEvaluation: ...\nScore: X/10\nStrengths: ...\nImprovements: ...\nBetter Answer: ...`:''}\n${currentMode==='COMMUNICATION'?`Communication coach. Correct grammar, suggest better phrasing.\nFORMAT:\nResponse: ...\nCorrection: ...\nSuggestion: ...`:''}\n${currentMode==='SITUATIONAL'?`Give workplace scenario, evaluate response, suggest best approach.\nFORMAT:\nScenario: ...\nEvaluation: ...\nBest Approach: ...`:''}`;
+
+  try {
+    const response=await fetch('https://placeai-backend-v9up.onrender.com/api/chat',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:systemPrompt,messages:conversationHistory})});
+    const data=await response.json();
+    const aiText=data.content?.map(b=>b.text||'').join('')||'Sorry, could not generate a response.';
+    conversationHistory.push({role:'assistant',content:aiText});
+    const score=currentMode==='INTERVIEW'?extractScore(aiText):null;
+    await saveMessage('assistant',aiText,score);
+    removeTyping(); appendMessage('ai',aiText);
+  }catch(e){removeTyping();appendMessage('ai','Connection error. Check your API/backend and try again.');conversationHistory.pop();}
+  isLoading=false; document.getElementById('sendBtn').disabled=false; input.focus();
+}
+
+function fmtDate(str){if(!str)return '';const d=new Date(str);return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});}
+function showToast(msg,type='success'){const t=document.createElement('div');t.className='toast '+type;t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3000);}
+</script>
+</body>
+</html>
